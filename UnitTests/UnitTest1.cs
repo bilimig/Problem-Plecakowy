@@ -99,7 +99,7 @@ namespace TestProject
 
         [TestMethod]
         public void TestNullItemsList()
-        {
+        {s
            
             Problem problem = new Problem(10, 10); 
             problem.items = null;

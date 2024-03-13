@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 [assembly: InternalsVisibleTo("UnitTests")]
-[assembly: InternalsVisibleTo("Gui")]
+[assembly: InternalsVisibleTo("Interface")]
 
 namespace Lab2_KO
 {
@@ -48,7 +48,7 @@ namespace Lab2_KO
             } 
             return false; 
         }
-        public void Solve(int capacity)
+        public Result Solve(int capacity)
         {
             if (capacity < 0)
             {
@@ -61,6 +61,7 @@ namespace Lab2_KO
                 throw new NullReferenceException("List of items cannot be null.");
             }
             _sorted_items = items.OrderByDescending(item => item.ratio).ToList();
+
             int i = 0;
             foreach (var item in _sorted_items)
             {
@@ -81,7 +82,19 @@ namespace Lab2_KO
                 _endweight += _sorted_items[item].weight;
             }
          
-            _result = new Result(_result_items);
+            return new Result(_result_items);
+        }
+
+        public List<string> getresults()
+        {
+            List<string> results = new List<string>();
+            foreach (var item in _result_items)
+            {
+
+                results.Add(string.Join("   ", $"no: {item.ToString()}", $"v: {_sorted_items[item].value.ToString()}", $"w: {_sorted_items[item].weight.ToString()}"));
+
+            }
+            return results;
         }
 
         public void SeeResult()
