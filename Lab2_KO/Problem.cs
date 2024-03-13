@@ -74,22 +74,26 @@ namespace Lab2_KO
                 }
                 i++;
             }
+            foreach (var item in _result_items)
+            {
+                
+                _endvalue += _sorted_items[item].value;
+                _endweight += _sorted_items[item].weight;
+            }
+         
             _result = new Result(_result_items);
         }
 
         public void SeeResult()
         {
-            int endweight = 0;
-            int endvalue = 0;
+          
             foreach (var item in _result_items)
             {
                 Console.WriteLine("Item number: {0} has value: {1} and weight: {2}", item, _sorted_items[item].value, _sorted_items[item].weight);
-                endvalue += _sorted_items[item].value;
-                endweight += _sorted_items[item].weight;
+               
             }
-            _endvalue = endvalue;
-            _endweight = endweight;
-            Console.WriteLine($"Total value: {endvalue}, Total weight: {endweight}");
+        
+            Console.WriteLine($"Total value: {_endvalue}, Total weight: {_endweight}");
         }
     }
 

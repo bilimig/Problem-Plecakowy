@@ -63,15 +63,12 @@ namespace TestProject
         [TestMethod]
         public void TestSpecificInstanceSolution()
         {
-           
+          
             Problem problem = new Problem(10, 10); 
             int capacity = 10;
-
             problem.Solve(capacity);
-
-          
            
-            Assert.AreEqual(10, problem._sorted_items[0].value); 
+            Assert.AreEqual(26, problem._endvalue); 
         }
 
      
