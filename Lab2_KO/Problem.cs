@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+
+[assembly: InternalsVisibleTo("UnitTests")]
 
 namespace Lab2_KO
 {
@@ -12,18 +15,22 @@ namespace Lab2_KO
     {
         private int _n;
         public List<Item> items = new List<Item>();
-        private int _capasity;
+        private int _capacity;
         public List<Item> _sorted_items = new List<Item>();
         public Result _result;
         public List<int> _result_items = new List<int>();
+        public int _endweight;
+        public int _endvalue;
         public Problem(int seed, int n) 
         { 
             _n = n;
             Random random = new Random(seed);
             for (int i = 0; i < _n; i++)
             {
-                int v = random.Next(10);
-                int w = random.Next(10);
+                int v = random.Next(9);
+                v++;
+                int w = random.Next(9);
+                w++;
                 Item temp_item = new Item(w, v);
                 items.Add(temp_item);
             }
@@ -33,23 +40,25 @@ namespace Lab2_KO
         public bool IsFitting(Item item)
         {
 
-            if (item.weight <= _capasity) 
+            if (item.weight <= _capacity) 
             {
-                _capasity -= item.weight;
+                _capacity -= item.weight;
                 return true; 
             } 
             return false; 
         }
-        public void Solve(int capasity)
+        public void Solve(int capacity)
         {
-           
-            _capasity = capasity;
+            _capacity = capacity;
+            if (items == null)
+            {
+                throw new NullReferenceException("List of items cannot be null.");
+            }
             _sorted_items = items.OrderByDescending(item => item.ratio).ToList();
             int i = 0;
-            foreach ( var item in _sorted_items)
+            foreach (var item in _sorted_items)
             {
-                
-                if(capasity == 0)
+                if (capacity == 0)
                 {
                     break;
                 }
@@ -57,10 +66,11 @@ namespace Lab2_KO
                 {
                     _result_items.Add(i);
                 }
-                i += 1;
+                i++;
             }
             _result = new Result(_result_items);
         }
+
         public void SeeResult()
         {
             int endweight = 0;
@@ -71,9 +81,10 @@ namespace Lab2_KO
                 endvalue += _sorted_items[item].value;
                 endweight += _sorted_items[item].weight;
             }
-            Console.WriteLine(endvalue.ToString(), endweight.ToString());
+            _endvalue = endvalue;
+            _endweight = endweight;
+            Console.WriteLine($"Total value: {endvalue}, Total weight: {endweight}");
         }
-                
     }
 
 
