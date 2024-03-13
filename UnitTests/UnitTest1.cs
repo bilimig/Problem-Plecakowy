@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Lab2_KO; // Import projektu g³ównego
+using Lab2_KO; 
 
 namespace TestProject
 {
@@ -26,7 +26,8 @@ namespace TestProject
         public void TestNoItemFits()
         {
            
-            Problem problem = new Problem(10, 10); 
+            Problem problem = new Problem(10, 0); 
+            problem.items.Add(new Item(2, 2));
             int capacity = 1; 
 
           
@@ -40,8 +41,15 @@ namespace TestProject
         public void TestItemOrderDoesNotAffectSolution()
         {
      
-            Problem problem1 = new Problem(10, 10); 
-            Problem problem2 = new Problem(10, 10); 
+            Problem problem1 = new Problem(10, 0);
+            problem1.items.Add(new Item(2, 2));
+            problem1.items.Add(new Item(3, 3));
+            problem1.items.Add(new Item(1, 1));
+
+            Problem problem2 = new Problem(10, 0);
+            problem2.items.Add(new Item(1, 1));
+            problem2.items.Add(new Item(2, 2));
+            problem2.items.Add(new Item(3, 3));
             int capacity = 10;
 
             
@@ -70,7 +78,7 @@ namespace TestProject
         [TestMethod]
         public void TestCapacityZero()
         {
-            // Arrange
+
             Problem problem = new Problem(10, 10); 
             int capacity = 0;
 
@@ -99,7 +107,6 @@ namespace TestProject
             Problem problem = new Problem(10, 10); 
             problem.items = null;
 
-           
             Assert.ThrowsException<NullReferenceException>(() => problem.Solve(10)); 
         }
     }

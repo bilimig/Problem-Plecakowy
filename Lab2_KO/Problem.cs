@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 [assembly: InternalsVisibleTo("UnitTests")]
+[assembly: InternalsVisibleTo("Gui")]
 
 namespace Lab2_KO
 {
@@ -49,6 +50,11 @@ namespace Lab2_KO
         }
         public void Solve(int capacity)
         {
+            if (capacity < 0)
+            {
+                throw new ArgumentException("Capacity cannot be negative.", nameof(capacity));
+            }
+
             _capacity = capacity;
             if (items == null)
             {

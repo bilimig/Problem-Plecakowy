@@ -14,7 +14,6 @@ namespace Lab2_KO
         {
             if(result != null)
             {
-
                 items = result.ConvertAll<string>(x => x.ToString());
             }
             
