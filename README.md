@@ -1,6 +1,6 @@
 ## Opis projektu
 Celem projektu jest stworzenie:
-- Pierwsza aplikacja konsolowa .NET – optymalizacja problemu plecakowego.
+- Aplikacja konsolowa .NET – optymalizacja problemu plecakowego.
 - Testy jednostkowe dla aplikacji konsolowej.
 - Graficzny interfejs użytkownika.
 
